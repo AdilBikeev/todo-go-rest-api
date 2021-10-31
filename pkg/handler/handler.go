@@ -1,9 +1,16 @@
 package handler
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/adcoder/todo-app/pkg/service"
+	"github.com/gin-gonic/gin"
+)
 
 type Handler struct {
-	
+	services *service.Service
+}
+
+func NewHandler(services *service.Service) *Handler {
+	return &Handler{services: services}
 }
 
 // Инициализация маршрутов сервера

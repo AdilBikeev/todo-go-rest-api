@@ -3,11 +3,15 @@ package main
 import (
 	todo_app "github.com/adcoder/todo-app"
 	"github.com/adcoder/todo-app/pkg/handler"
+	"github.com/adcoder/todo-app/pkg/repository"
+	"github.com/adcoder/todo-app/pkg/service"
 	"log"
 )
 
 func main() {
-	handlers := new(handler.Handler)
+	repos := repository.NewRepository()
+	services := service.NewService(repos)
+	handlers := handler.NewHandler(services)
 
 	srv := new(todo_app.Server)
 	if err := srv.Run("8008", handlers.InitRoutes()); err != nil {
